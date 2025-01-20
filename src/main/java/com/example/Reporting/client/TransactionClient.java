@@ -3,7 +3,6 @@ package com.example.Reporting.client;
 import com.example.Reporting.model.Transaction;
 import org.springframework.graphql.client.HttpGraphQlClient;
 import org.springframework.stereotype.Component;
-import reactor.core.publisher.Mono;
 
 import java.util.List;
 import java.util.Map;
@@ -22,7 +21,6 @@ public class TransactionClient {
                 query MyQuery($ids: [Long], $startDate: String, $endDate: String) {
                    transactions(portfolioIds: $ids, startDate: $startDate, endDate: $endDate) {
                      parentPortfolio {
-                       id
                        shortName
                      }
                      securityCode
@@ -39,7 +37,7 @@ public class TransactionClient {
                 """;
 
         return graphQlClient.document(document)
-                .variables(Map.of("ids", List.of(3)))
+                .variables(variables)
                 .retrieveSync("transactions")
                 .toEntityList(Transaction.class);
     }
