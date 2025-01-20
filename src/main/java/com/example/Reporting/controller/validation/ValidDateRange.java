@@ -5,7 +5,7 @@ import jakarta.validation.Constraint;
 import java.lang.annotation.*;
 
 @Documented
-@Target(ElementType.TYPE)
+@Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 @Constraint(validatedBy = DateRangeValidator.class)
 public @interface ValidDateRange {

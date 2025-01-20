@@ -1,14 +1,12 @@
 package com.example.Reporting.controller.validation;
 
-import com.example.Reporting.controller.dto.DateRange;
+import com.example.Reporting.controller.dto.ReportDetails;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
-import java.time.LocalDate;
-
 import static java.util.Objects.isNull;
 
-public class DateRangeValidator implements ConstraintValidator<ValidDateRange, DateRange> {
+public class DateRangeValidator implements ConstraintValidator<ValidDateRange, ReportDetails> {
 
     @Override
     public void initialize(ValidDateRange constraintAnnotation) {
@@ -16,13 +14,10 @@ public class DateRangeValidator implements ConstraintValidator<ValidDateRange, D
     }
 
     @Override
-    public boolean isValid(DateRange value, ConstraintValidatorContext context) {
-        LocalDate startDate = value.startDate();
-        LocalDate endDate = value.endDate();
-        if (isNull(value) || isNull(startDate) || isNull(endDate)) {
+    public boolean isValid(ReportDetails value, ConstraintValidatorContext context) {
+        if (isNull(value) || isNull(value.startDate()) || isNull(value.endDate())) {
             return true;
         }
-//        return !value.startDate().isAfter(value.endDate());
-        return false;
+        return !value.startDate().isAfter(value.endDate());
     }
 }

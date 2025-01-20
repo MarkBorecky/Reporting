@@ -8,8 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Validated
@@ -25,13 +24,11 @@ public class ReportController {
             produces = MediaType.APPLICATION_OCTET_STREAM_VALUE
     )
     public ResponseEntity<byte[]> foo(@Valid ReportDetails reportDetails) {
-//        byte[] csvBytes = portfolioService.prepareReport(reportDetails);
+        byte[] csvBytes = portfolioService.prepareReport(reportDetails);
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
+        headers.setContentDispositionFormData("attachement", "transactions.csv");
 
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-//        headers.setContentDispositionFormData("attachement", "transactions.csv");
-//
-//        return new ResponseEntity<>(csvBytes, headers, HttpStatus.OK);
-        return null;
+        return new ResponseEntity<>(csvBytes, headers, HttpStatus.OK);
     }
 }
