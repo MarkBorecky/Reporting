@@ -1,11 +1,11 @@
 package com.example.Reporting.client;
 
+import com.example.Reporting.controller.dto.ReportRequest;
 import com.example.Reporting.model.Transaction;
 import org.springframework.graphql.client.HttpGraphQlClient;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
-import java.util.Map;
 
 @Component
 public class TransactionClient {
@@ -15,11 +15,11 @@ public class TransactionClient {
         this.graphQlClient = graphQlClient;
     }
 
-    public List<Transaction> fetchTransactionsByPortfolioId(Map<String, Object> variables) {
+    public List<Transaction> fetchTransactionsByPortfolioId(ReportRequest request) {
 
         String document = """
                 query MyQuery($ids: [Long], $startDate: String, $endDate: String) {
-                   transactions(portfolioIds: $ids, startDate: $startDate, endDate: $endDate) {
+                  transactions(portfolioIds: $ids, startDate: $startDate, endDate: $endDate) {
                      parentPortfolio {
                        shortName
                      }
@@ -36,8 +36,9 @@ public class TransactionClient {
                  }
                 """;
 
-        return graphQlClient.document(document)
-                .variables(variables)
+        return graphQlClient
+                .document(document)
+                .variables(request.mapToVariables())
                 .retrieveSync("transactions")
                 .toEntityList(Transaction.class);
     }

@@ -1,12 +1,12 @@
 package com.example.Reporting.controller.validation;
 
-import com.example.Reporting.controller.dto.ReportDetails;
+import com.example.Reporting.controller.dto.ReportRequest;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 
 import static java.util.Objects.isNull;
 
-public class DateRangeValidator implements ConstraintValidator<ValidDateRange, ReportDetails> {
+public class DateRangeValidator implements ConstraintValidator<ValidDateRange, ReportRequest> {
 
     @Override
     public void initialize(ValidDateRange constraintAnnotation) {
@@ -14,7 +14,7 @@ public class DateRangeValidator implements ConstraintValidator<ValidDateRange, R
     }
 
     @Override
-    public boolean isValid(ReportDetails value, ConstraintValidatorContext context) {
+    public boolean isValid(ReportRequest value, ConstraintValidatorContext context) {
         if (isNull(value) || isNull(value.startDate()) || isNull(value.endDate())) {
             return true;
         }

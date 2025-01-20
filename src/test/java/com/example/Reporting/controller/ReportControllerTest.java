@@ -1,6 +1,6 @@
 package com.example.Reporting.controller;
 
-import com.example.Reporting.controller.dto.ReportDetails;
+import com.example.Reporting.controller.dto.ReportRequest;
 import com.example.Reporting.service.ReportService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -24,9 +24,6 @@ class ReportControllerTest {
     @MockitoBean
     private ReportService service;
 
-    private static final String TOKEN = "Bearer stub token";
-
-
     @Test
     void shouldFailBecauseLackOfAuthentication() throws Exception {
         this.mockMvc.perform(get("/reports"))
@@ -45,7 +42,7 @@ class ReportControllerTest {
     @Test
     @WithMockUser
     void shouldPrepareReportWhenIdsGiven() throws Exception {
-        when(service.prepareReport(Mockito.any(ReportDetails.class)))
+        when(service.prepareReport(Mockito.any(ReportRequest.class)))
                 .thenReturn(new byte[]{});
 
         this.mockMvc.perform(get("/reports").param("ids", "1"))
@@ -69,7 +66,7 @@ class ReportControllerTest {
     @Test
     @WithMockUser
     void shouldPrepareReportWhenIdsAndOneDayRangeGiven() throws Exception {
-        when(service.prepareReport(Mockito.any(ReportDetails.class)))
+        when(service.prepareReport(Mockito.any(ReportRequest.class)))
                 .thenReturn(new byte[]{});
 
         this.mockMvc.perform(
@@ -84,7 +81,7 @@ class ReportControllerTest {
     @Test
     @WithMockUser
     void shouldPrepareReportWhenAllArgsGiven() throws Exception {
-        when(service.prepareReport(Mockito.any(ReportDetails.class)))
+        when(service.prepareReport(Mockito.any(ReportRequest.class)))
                 .thenReturn(new byte[]{});
 
         this.mockMvc.perform(
