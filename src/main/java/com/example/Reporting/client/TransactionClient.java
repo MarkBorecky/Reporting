@@ -20,9 +20,7 @@ public class TransactionClient {
         String document = """
                 query MyQuery($ids: [Long], $startDate: String, $endDate: String) {
                   transactions(portfolioIds: $ids, startDate: $startDate, endDate: $endDate) {
-                     parentPortfolio {
-                       shortName
-                     }
+                     portfolioShortName
                      securityCode
                      securityName
                      currencyCode
