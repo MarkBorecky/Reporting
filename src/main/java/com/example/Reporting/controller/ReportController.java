@@ -68,14 +68,4 @@ public class ReportController {
 
         return new ResponseEntity<>(csvBytes, headers, HttpStatus.OK);
     }
-
-    @GetMapping("/test")
-    String hello() {
-        return "Hello World";
-    }
-
-    @GetMapping("/secure")
-    String secure() {
-        return "Hello Secure World";
-    }
 }
