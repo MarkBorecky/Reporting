@@ -52,7 +52,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
             long expiration = payloadJson.getLong("exp");
             long currentTime = System.currentTimeMillis() / 1_000;
 
-            return expiration < currentTime;
+            return expiration > currentTime;
         }
         return false;
     }
