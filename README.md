@@ -8,3 +8,15 @@ The project leverages the latest versions of Java and Spring.
 ### SWAGGER
 
 Swagger documentation is available at: http://localhost:8080/swagger-ui/index.html. I also configured Swagger to support token-based requests by allowing tokens to be added directly to the requests in the Swagger UI.
+
+### RUN
+
+build image
+```shell
+  docker build -t REPORTING:v1 . 
+```
+
+run image
+```shell
+  sudo docker run -p 8080:8080 reporting:v1 -n reporting-api
+```
