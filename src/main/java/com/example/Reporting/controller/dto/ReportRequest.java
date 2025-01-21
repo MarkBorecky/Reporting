@@ -21,7 +21,7 @@ public record ReportRequest(
                 explode = Explode.TRUE,
                 style = ParameterStyle.MATRIX
         )
-        List<Integer> ids,
+        List<Long> ids,
 
         @Parameter(
                 description = "Start date for the transactions filter (format: yyyy-MM-dd)",

@@ -1,5 +1,6 @@
 package com.example.Reporting.config;
 
+import com.example.Reporting.exception.DataFetchException;
 import com.example.Reporting.exception.NoAuthorizationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,5 +13,10 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(NoAuthorizationException.class)
     public ResponseEntity<String> handleInvalidRequestException(NoAuthorizationException ex) {
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(DataFetchException.class)
+    public ResponseEntity<String> handleDataFetchException(DataFetchException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }
 }

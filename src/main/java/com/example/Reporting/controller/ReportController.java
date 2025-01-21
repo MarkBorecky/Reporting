@@ -48,13 +48,11 @@ public class ReportController {
                     ),
                     @ApiResponse(
                             responseCode = "400",
-                            description = "Invalid input parameters",
-                            content = @Content(mediaType = "application/json")
+                            description = "Invalid input parameters"
                     ),
                     @ApiResponse(
                             responseCode = "500",
-                            description = "Unexpected server error",
-                            content = @Content(mediaType = "application/json")
+                            description = "Unexpected server error"
                     )
             }
     )
